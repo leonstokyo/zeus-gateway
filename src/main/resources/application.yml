@@ -1,0 +1,20 @@
+server:
+  port: 3030
+
+spring:
+  application:
+    name: zeus-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: resource.leons-tokyo.top:8848
+        username: ${zeus.nacos.username}
+        password: ${zeus.nacos.password}
+        group: zeus
+
+    gateway:
+      routes:
+        - id: user_route
+          uri: lb://zeus-user
+          predicates:
+            - Path=/v1/api/user/**
